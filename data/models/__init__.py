@@ -1,0 +1,1 @@
+from .conta_bancaria_model import ContaBancariaModel

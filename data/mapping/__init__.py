@@ -1,0 +1,1 @@
+from .conta_bancaria_mapping import ContaBancariaMapping
