@@ -70,8 +70,7 @@ Exemplo de Requisição:
 ```json
 {
     "account_number": "88888-88",    		# Formato correto para fazer a requisição
-    "account_holder": "Nome da Pessoa",		# Nome não pode conter caracteres especiais ou números
-    "balance": "0.00"
+    "account_holder": "Nome da Pessoa"		# Nome não pode conter caracteres especiais ou números
 }
 ```
 Exemplo de Resposta: "200 OK"
