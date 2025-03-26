@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from domain.interfaces import IContaBancariaRepository
 from domain.entities import ContaBancaria
 from data.repositories import Repository
@@ -49,3 +50,17 @@ class ContaBancariaRepository(Repository[ContaBancariaModel], IContaBancariaRepo
     
     def delete(self, id: int) -> ContaBancaria:
         return super().delete(id)
+    
+    def update_balance(self, dictionary, id):
+        conta_bancaria_entity = ContaBancariaMapping.dict_to_entity(dictionary)
+
+        try:
+            model_verificado = self._model.objects.get(id=id)
+        except ObjectDoesNotExist:
+            raise ValueError()
+        
+        model_verificado.balance = conta_bancaria_entity.balance
+        model_verificado.save()
+
+        conta_bancaria_balance_modificado = ContaBancariaMapping.to_entity(model_verificado)
+        return conta_bancaria_balance_modificado

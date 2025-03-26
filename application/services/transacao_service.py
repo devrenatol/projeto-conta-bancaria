@@ -35,8 +35,7 @@ class TransacaoService(ITransacaoService):
             transacao_dto = ContaBancariaRequestSerializer(data=conta_bancaria_dict)
 
             if transacao_dto.is_valid():
-                print(transacao_dto.data)
-                conta_bancaria_transacao_concluida = self._repository.update(dictionary=transacao_dto.validated_data, id=id)
+                conta_bancaria_transacao_concluida = self._repository.update_balance(dictionary=transacao_dto.validated_data, id=id)
                 conta_bancaria_transacao_concluida_dto = TransacaoResponseSerializer(conta_bancaria_transacao_concluida)
 
             return conta_bancaria_transacao_concluida_dto.data
@@ -56,8 +55,7 @@ class TransacaoService(ITransacaoService):
             transacao_dto = ContaBancariaRequestSerializer(data=conta_bancaria_dict)
 
             if transacao_dto.is_valid():
-                print(transacao_dto.data)
-                conta_bancaria_transacao_concluida = self._repository.update(dictionary=transacao_dto.validated_data, id=id)
+                conta_bancaria_transacao_concluida = self._repository.update_balance(dictionary=transacao_dto.validated_data, id=id)
                 conta_bancaria_transacao_concluida_dto = TransacaoResponseSerializer(conta_bancaria_transacao_concluida)
 
             return conta_bancaria_transacao_concluida_dto.data
@@ -84,11 +82,11 @@ class TransacaoService(ITransacaoService):
             transacao_deposito_dto = ContaBancariaRequestSerializer(data=conta_bancaria_receptor_dict)
 
             if transacao_saque_dto.is_valid():
-                conta_bancaria_transacao_saque_concluida = self._repository.update(dictionary=transacao_saque_dto.validated_data, id=id)
+                conta_bancaria_transacao_saque_concluida = self._repository.update_balance(dictionary=transacao_saque_dto.validated_data, id=id)
                 conta_bancaria_transacao_concluida_dto = TransacaoResponseSerializer(conta_bancaria_transacao_saque_concluida)
             
             if transacao_deposito_dto.is_valid():
-                self._repository.update(dictionary=transacao_deposito_dto.validated_data, id=conta_bancaria_receptor_entity.id)
+                self._repository.update_balance(dictionary=transacao_deposito_dto.validated_data, id=conta_bancaria_receptor_entity.id)
 
 
             return conta_bancaria_transacao_concluida_dto.data
